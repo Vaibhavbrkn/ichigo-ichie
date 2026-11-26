@@ -251,6 +251,7 @@ const sfx = {
   },
   brush(){ if (ac()) noise(now(), .5, { type: "lowpass", f: 900, q: .4, vol: .06, att: .12 }); },
   twinkle(){ if (!ac()) return; const t = now(); [1568, 2093, 2637, 3136, 2637].forEach((f, k) => bell(f, t + k * .14, .016)); },
+  leaf(){ if (ac()) bell(pick([1174.7, 1318.5, 1480, 1760, 1975.5, 2349.3]), now(), .012); },
 };
 
 /* the music: an original piano loop, rendered once in .thanks-build/music.py so a phone never has to build it */
@@ -612,8 +613,9 @@ async function pShape(){
   const r = f.getBoundingClientRect(), s = SR();
   fx.burst(r.left - s.left + r.width / 2, r.top - s.top + r.height / 2, 110);
   await clear();
+  scene({ bg: "w00-paper", theme: "ink", pos: "center" });
   stage.classList.add("flood");
-  fx.set({ motes: 40 });
+  fx.set({ leaves: 12 });
   await pause(1300);
   f.remove();
   await say("I want the whole world to be Jess.", "mid", 3200);
@@ -762,7 +764,61 @@ async function pHonest(){
   await next();
 }
 
-/* ---------- 10. happy thanksgiving ---------- */
+/* ---------- 10. about you: a bare tree fills with leaves, one line at a time ---------- */
+const LEAVES = (() => {
+  let s = 11;
+  const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const out = [];
+  while (out.length < 60){
+    const a = r() * 6.283, d = Math.sqrt(.15 + .85 * r());
+    const u = .5 + Math.cos(a) * d * .33, v = .36 + Math.sin(a) * d * .24;
+    if (v < .58) out.push([u, v, r(), r()]);
+  }
+  return out;
+})();
+const LEAF_COL = [["#f0a548", "#c8612a"], ["#e8bf55", "#d0832f"], ["#d9653a", "#9e3a2a"], ["#e58a62", "#b44a3c"], ["#c97a8a", "#8e3b4a"], ["#f2c06a", "#e08a3a"]];
+let leafI = 0;
+function leaves(n, gap = 140){
+  for (let k = 0; k < n && leafI < LEAVES.length; k++){
+    const [u, v, a, b] = LEAVES[leafI++], [c1, c2] = LEAF_COL[Math.floor(b * LEAF_COL.length)];
+    const m = mark("leaf", u, v);
+    m.style.setProperty("--r", `${Math.round(a * 140 - 70)}deg`);
+    m.style.setProperty("--s", (.8 + b * .6).toFixed(2));
+    m.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+    setTimeout(() => { m.classList.add("on"); sfx.leaf(); }, (FAST ? 20 : gap) * k + 60);
+  }
+}
+async function pPraise(){
+  scene({ bg: "w18-branch", theme: "ink", pos: "bottom" });
+  fx.set({});
+  curPic.querySelectorAll(".leaf").forEach((l) => l.remove());
+  leafI = 0;
+  const line = (html, n, cls = "sm", ms) => { leaves(n); return say(html, cls, ms); };
+  put("About you", "kick");
+  await pause(1200);
+  await line("Before I go, a few things about you that you should hear more often.", 3);
+  await line("You're beautiful. Honestly, that's the least interesting thing about you.", 4);
+  await line("You're kind without ever making a show of it. People just feel lighter around you.", 4);
+  await next();
+  await clear();
+  await line("A chartered accountant, a Bharatanatyam dancer, a black belt. And still the gentlest person in the room.", 5);
+  await line("You carry a full plate and a new role, and you still make time for the people you love.", 4);
+  await line("You love your family with your whole heart: Amma, Appa, your brother, and of course Brianna.", 5);
+  await next();
+  await clear();
+  await line("You're brave, you're funny, and you make ordinary days feel like the holidays.", 5);
+  await line("And you have no idea how rare you are.", 4, "it sm");
+  await next();
+  await clear();
+  leaves(LEAVES.length, 70);
+  fx.set({ leaves: 8 });
+  await say("If I'm thankful for one thing this year, it's you.", "mid", 3600);
+  await say("Thank you, God, for your favourite child.", "", 3200);
+  await say("Happy Thanksgiving, Jess.", "big", 3000);
+  await next();
+}
+
+/* ---------- 11. only her, and thank you ---------- */
 async function pEnd(){
   stage.classList.add("white");
   fx.set({});
@@ -771,13 +827,11 @@ async function pEnd(){
   music.level(.8, 4);
   await pause(1700);
   stage.classList.remove("white");
-  fx.set({ leaves: 9, motes: 10 });
+  fx.set({ leaves: 7 });
   sfx.chime();
-  await pause(1800);
-  await say("Happy Thanksgiving, Jess.", "big", 2600);
-  await say("Thank you for being there. For being you. For being in my life.", "it", 3600);
-  await say("And thank you, God, for your favourite child.", "", 3400);
-  await pause(1200);
+  await pause(2000);
+  put("Thank you,<br><em>Jess</em>", "huge");
+  await pause(5000);
   const end = el("div", "endbox");
   end.append(el("div", "ps", "<b>P.S.</b> Completely unrelated: I've asked my manager if a transfer to Bangalore is possible."));
   stage.append(end);
@@ -790,7 +844,7 @@ async function pEnd(){
   go(0);
 }
 
-const PAGES = [pOpen, pGrace, pKaun, pShape, pDestiny, pIchigo, pSecret, pCare, pHonest, pEnd];
+const PAGES = [pOpen, pGrace, pKaun, pShape, pDestiny, pIchigo, pSecret, pCare, pHonest, pPraise, pEnd];
 const dots = $("#dots");
 PAGES.forEach(() => dots.append(el("i")));
 
@@ -804,7 +858,7 @@ function go(i){
   dropButton();
   stage.querySelectorAll(".frame, .endbox, .gl").forEach((f) => f.remove());
   stage.classList.remove("flood", "white");
-  if (i !== 8 && i !== 9) music.level(.75, 2);
+  if (PAGES[i] !== pHonest) music.level(.75, 2);
   [...dots.children].forEach((d, k) => { d.classList.toggle("on", k === i); d.classList.toggle("done", k < i); });
   quiet(500);
   if (i > 0) sfx.page();
@@ -831,6 +885,6 @@ function go(i){
   }, { once: true });
   /* the rest of the paintings load quietly in order while she reads */
   ["w02-grace", "w00-paper", "w03-tree", "w04-wind", "w16-destiny", "w05-birds", "w06-waited", "w07-strangers", "w08-rain",
-    "w09-autumn", "w10-palace", "w11-world", "w17-tea", "w12-moon", "w14-care", "w15-bridge", "w13-jess"]
+    "w09-autumn", "w10-palace", "w11-world", "w17-tea", "w12-moon", "w14-care", "w15-bridge", "w18-branch", "w13-jess"]
     .reduce((p, n) => p.then(() => img(n)), img("w01-window"));
 })();

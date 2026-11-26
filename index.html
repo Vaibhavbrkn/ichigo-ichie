@@ -47,6 +47,10 @@
   .pic i.on, .gl.on{ opacity:1; }
   .wglow{ width:260px; height:260px; margin:-130px 0 0 -130px; background:radial-gradient(circle, rgba(255,226,150,.95), rgba(255,190,90,.45) 35%, rgba(255,170,60,0) 70%); mix-blend-mode:screen; transform:scale(.6); }
   .wglow.on{ transform:scale(1.25); }
+  .pic i.leaf::after{ content:""; position:absolute; left:12%; right:12%; top:50%; height:1px; background:rgba(90,36,16,.35); }
+  .pic i.leaf{ width:30px; height:16px; margin:-8px 0 0 -15px; border-radius:2px 100% 2px 100%; mix-blend-mode:multiply; filter:blur(.25px);
+    transform:rotate(var(--r)) scale(0); transition:transform .9s cubic-bezier(.3,1.6,.5,1), opacity .5s ease; }
+  .pic i.leaf.on{ opacity:.9; transform:rotate(var(--r)) scale(var(--s)); }
   .pic .mdim{ width:150px; height:150px; margin:-75px 0 0 -75px; background:radial-gradient(circle, rgba(30,16,40,.62) 45%, rgba(30,16,40,0) 72%); }
   #glow{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0; transition:opacity 1.4s ease;
     background:radial-gradient(120% 80% at 50% 36%, #fffaf0 0, #ffe9bf 38%, #f7c98e 72%, #e9a877 100%); }
@@ -81,6 +85,8 @@
   .ln.it{ font-style:italic; }
   .ln.big{ font:italic 600 42px/1.08 var(--serif); }
   .ln.mid{ font:italic 600 32px/1.15 var(--serif); }
+  .ln.huge{ font:italic 600 54px/1 var(--serif); animation-duration:2.2s; }
+  .ln.huge em{ display:block; font-size:78px; color:#a5532b; }
   .ln.sm{ font-size:22px; }
   .ln.kick{ font:800 12px/1.2 var(--sans); letter-spacing:.24em; text-transform:uppercase; color:var(--gold); animation:fin .8s ease both; margin-bottom:2px; }
   .ink .ln.kick, .flood .ln.kick{ color:var(--rust); }
@@ -170,7 +176,8 @@
   @media (max-height:700px){
     .ln{ font-size:22.5px; } .ln.big{ font-size:36px; } .ln.mid{ font-size:28px; } .ln.hi{ font-size:24px; } .ln.re{ font-size:29px; }
     .ln.plain{ font-size:16px; } .ln.list{ font-size:20px; } .ln.sm{ font-size:20px; } .ln.kanji{ font-size:50px; }
-    #txt{ gap:9px; } .pos-bottom #txt{ bottom:calc(112px + var(--bot)); } .hasAct.pos-bottom #txt{ bottom:calc(178px + var(--bot)); }
+    .ln.huge{ font-size:46px; } .ln.huge em{ font-size:66px; }
+    #txt{ gap:9px; } .pos-bottom #txt{ bottom:calc(124px + var(--bot)); } .hasAct.pos-bottom #txt{ bottom:calc(178px + var(--bot)); }
     #start h1{ font-size:46px; } #start h1 em{ font-size:64px; }
   }
   @media (prefers-reduced-motion:reduce){ .pic{ animation:none; } }
@@ -213,6 +220,6 @@
     </div>
   </div>
 </div>
-<script src="app.js?v=2"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
