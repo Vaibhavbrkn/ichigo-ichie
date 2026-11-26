@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#24121f">
+<title>Thank you, Jess</title>
+<meta name="description" content="A little Thanksgiving note. Sound on.">
+<meta property="og:title" content="Thank you, Jess 🍂">
+<meta property="og:description" content="A little Thanksgiving note. Sound on.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://vaibhavbrkn.github.io/ichigo-ichie/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Mulish:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&text=%E4%B8%80%E6%9C%9F%E4%BC%9A&display=block" rel="stylesheet">
+<link rel="preload" href="img/w01-window.webp" as="image" type="image/webp">
+<style>
+  :root{
+    --serif:"Cormorant Garamond", "Iowan Old Style", Georgia, "Times New Roman", serif;
+    --sans:"Mulish", system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
+    --top:env(safe-area-inset-top, 0px); --bot:env(safe-area-inset-bottom, 0px);
+    --gold:#ffd9a0; --rust:#a5532b; --ink:#3b2418; --cue:#ffd60a;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+  html,body{ height:100%; background:#140a12; overflow:hidden; overscroll-behavior:none; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+  body{ font-family:var(--sans); -webkit-font-smoothing:antialiased; color:#fff; touch-action:manipulation; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+  button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; touch-action:manipulation; }
+  [hidden]{ display:none !important; }
+
+  #stage{ position:relative; width:100%; height:100vh; height:100dvh; margin:0 auto; overflow:hidden; background:#24121f; isolation:isolate; touch-action:none; }
+  @media (min-width:600px){
+    body{ display:grid; place-items:center; background:radial-gradient(70% 60% at 50% 40%, #3a2030, #120810); }
+    #stage{ width:430px; height:min(932px, 100dvh - 32px); border-radius:34px; box-shadow:0 30px 90px rgba(0,0,0,.6), 0 0 0 10px #1d1118; }
+  }
+
+  /* ---------- paintings ---------- */
+  #bg{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+  .pic{ position:absolute; inset:0; background:center/cover no-repeat; opacity:0; transition:opacity 1.6s ease; animation:kb 28s ease-out forwards; will-change:transform, opacity; }
+  .pic.on{ opacity:1; }
+  @keyframes kb{ from{ transform:scale(1.09); } to{ transform:scale(1); } }
+  .pic i, .gl{ position:absolute; border-radius:50%; pointer-events:none; opacity:0; transition:opacity 2.4s ease, transform 2.4s ease; }
+  .gl{ z-index:5; }
+  .pic i.on, .gl.on{ opacity:1; }
+  .wglow{ width:260px; height:260px; margin:-130px 0 0 -130px; background:radial-gradient(circle, rgba(255,226,150,.95), rgba(255,190,90,.45) 35%, rgba(255,170,60,0) 70%); mix-blend-mode:screen; transform:scale(.6); }
+  .wglow.on{ transform:scale(1.25); }
+  .pic .mdim{ width:150px; height:150px; margin:-75px 0 0 -75px; background:radial-gradient(circle, rgba(30,16,40,.62) 45%, rgba(30,16,40,0) 72%); }
+  #glow{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0; transition:opacity 1.4s ease;
+    background:radial-gradient(120% 80% at 50% 36%, #fffaf0 0, #ffe9bf 38%, #f7c98e 72%, #e9a877 100%); }
+  .flood #glow{ opacity:1; }
+  .white #glow{ opacity:1; background:#fffaf2; transition-duration:1s; }
+  #fx{ position:absolute; inset:0; z-index:3; width:100%; height:100%; pointer-events:none; }
+
+  /* veils keep the words readable over the paintings */
+  .veil{ position:absolute; inset:0; z-index:4; pointer-events:none; opacity:0; transition:opacity .9s ease; }
+  #vTop{ background:linear-gradient(rgba(22,10,20,.5), rgba(22,10,20,0) 16%); }
+  #vB{ background:linear-gradient(rgba(0,0,0,0) 28%, rgba(26,11,22,.64) 54%, rgba(18,8,16,.93)); }
+  #vT{ background:linear-gradient(rgba(18,8,16,.88), rgba(26,11,22,.55) 38%, rgba(0,0,0,0) 62%); }
+  #iB{ background:linear-gradient(rgba(255,248,236,0) 40%, rgba(255,246,232,.78) 64%, rgba(255,244,228,.94)); }
+  #iT{ background:linear-gradient(rgba(255,246,232,.92), rgba(255,246,232,.72) 34%, rgba(255,248,236,0) 60%); }
+  #iC{ background:radial-gradient(90% 46% at 50% 50%, rgba(255,247,234,.85), rgba(255,247,234,0) 80%); }
+  #vC{ background:radial-gradient(95% 26% at 50% 50%, rgba(18,8,16,.62), rgba(18,8,16,0) 85%); }
+  .dark #vTop, .dark.pos-bottom #vB, .dark.pos-top #vT, .dark.pos-center #vC, .ink.pos-bottom #iB, .ink.pos-top #iT, .ink.pos-center #iC{ opacity:1; }
+  .flood .veil{ opacity:0 !important; }
+
+  /* ---------- words ---------- */
+  #txt{ position:absolute; z-index:20; left:24px; right:24px; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; transition:opacity .55s ease, bottom .5s ease; }
+  .pos-bottom #txt{ bottom:calc(136px + var(--bot)); }
+  .pos-top #txt{ top:calc(76px + var(--top)); }
+  .pos-center #txt{ top:50%; transform:translateY(-50%); }
+  .hasAct.pos-bottom #txt{ bottom:calc(196px + var(--bot)); }
+  #txt.out{ opacity:0; }
+  .ln{ max-width:30ch; font:500 25px/1.3 var(--serif); color:#fff7ec; text-wrap:balance;
+    text-shadow:0 2px 14px rgba(22,8,20,.8), 0 1px 3px rgba(0,0,0,.55); animation:lin 1.15s cubic-bezier(.2,.7,.2,1) both; }
+  .ink .ln{ color:var(--ink); text-shadow:0 0 12px rgba(255,249,238,.95), 0 0 2px rgba(255,249,238,.9); }
+  .flood .ln{ color:#4a2412; text-shadow:0 0 14px rgba(255,250,240,.9); }
+  @keyframes lin{ from{ opacity:0; filter:blur(7px); transform:translateY(10px); } }
+  .ln.it{ font-style:italic; }
+  .ln.big{ font:italic 600 42px/1.08 var(--serif); }
+  .ln.mid{ font:italic 600 32px/1.15 var(--serif); }
+  .ln.sm{ font-size:22px; }
+  .ln.kick{ font:800 12px/1.2 var(--sans); letter-spacing:.24em; text-transform:uppercase; color:var(--gold); animation:fin .8s ease both; margin-bottom:2px; }
+  .ink .ln.kick, .flood .ln.kick{ color:var(--rust); }
+  .ln.hi{ font:italic 500 28px/1.25 var(--serif); }
+  .ln.re{ font:italic 600 34px/1.1 var(--serif); color:#ffc98a; margin-top:-4px; }
+  .ink .ln.re{ color:#b0502a; }
+  .ln.en{ max-width:32ch; font:600 15px/1.5 var(--sans); opacity:.86; animation-name:fin; }
+  .ln.plain{ max-width:31ch; font:600 17.5px/1.5 var(--sans); color:#fffaf2; animation:fin 1s ease both; text-shadow:0 1px 10px rgba(10,14,26,.85), 0 1px 2px rgba(0,0,0,.6); }
+  .ln.list{ font-size:22px; line-height:1.2; }
+  .ln.kanji{ display:flex; gap:4px; font:400 60px/1 "Yuji Syuku", "Hiragino Mincho ProN", "Yu Mincho", serif; color:#1d1410; text-shadow:none; animation:none; margin-bottom:6px; }
+  .kanji span{ clip-path:inset(0 0 100% 0); animation:brush 1s cubic-bezier(.4,.1,.3,1) forwards; animation-delay:calc(var(--i) * .8s); }
+  @keyframes brush{ to{ clip-path:inset(-10% -10% -10% -10%); } }
+  @keyframes fin{ from{ opacity:0; } }
+
+  /* ---------- buttons on a page ---------- */
+  #act{ position:absolute; z-index:30; left:0; right:0; bottom:calc(98px + var(--bot)); display:flex; justify-content:center; pointer-events:none; }
+  #act > *{ pointer-events:auto; animation:fin .6s ease both; }
+  .pbtn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:52px; padding:14px 34px; border-radius:99px; background:#fffaf2; color:#3b2018; font:900 17px var(--sans); letter-spacing:.02em; box-shadow:0 10px 28px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.5); }
+  .pbtn.gold{ background:linear-gradient(180deg,#ffe7b0,#f2b866); }
+  .pbtn.ghost{ min-height:44px; padding:10px 20px; background:rgba(255,255,255,.55); color:#5a3020; font-size:14.5px; box-shadow:none; border:1px solid rgba(90,48,32,.25); }
+  .wait{ pointer-events:none !important; opacity:0 !important; }
+
+  .frame{ position:absolute; z-index:25; left:50%; top:36%; width:136px; height:170px; margin:-85px 0 0 -68px; padding:12px; border-radius:3px;
+    background:linear-gradient(135deg,#f6dc98,#b9873a 38%,#f8e6b0 58%,#94642a); box-shadow:0 16px 34px rgba(70,34,10,.35), inset 0 0 0 2px rgba(255,255,255,.45); animation:fin .9s ease both; }
+  .frame b{ display:grid; place-items:center; width:100%; height:100%; background:radial-gradient(circle at 50% 44%, #fff8e4, #f6d08a 58%, #dc9552);
+    box-shadow:inset 0 0 0 3px #7a4f1c, inset 0 5px 14px rgba(0,0,0,.25); font:italic 600 34px var(--serif); color:#7a3d1a; }
+  .frame.burst{ animation:fburst 1.5s cubic-bezier(.55,0,.25,1) forwards; pointer-events:none; }
+  @keyframes fburst{ 0%{ transform:scale(1); } 18%{ transform:scale(.9) rotate(-3deg); } 100%{ transform:scale(10); opacity:0; } }
+
+  .endbox{ position:absolute; z-index:30; left:20px; right:20px; bottom:calc(22px + var(--bot)); display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .ps{ max-width:32ch; padding:14px 18px 12px; border-radius:14px; background:rgba(255,250,242,.86); color:#4a2a1c;
+    font:600 15px/1.5 var(--sans); text-align:left; box-shadow:0 10px 30px rgba(60,20,10,.25); animation:fin 1.2s ease both; }
+  .ps b{ font-weight:900; color:var(--rust); }
+  .pbtn.ghost.again{ background:rgba(255,250,242,.8); }
+
+  /* ---------- top bar ---------- */
+  #top{ position:absolute; z-index:60; left:0; right:0; top:0; padding:calc(12px + var(--top)) 12px 0 18px; display:flex; align-items:center; justify-content:space-between; opacity:0; pointer-events:none; transition:opacity .6s; }
+  #top.on{ opacity:1; pointer-events:auto; }
+  #dots{ display:flex; gap:6px; }
+  #dots i{ width:6px; height:6px; border-radius:99px; background:rgba(255,255,255,.4); transition:width .4s, background .4s; }
+  #dots i.on{ width:20px; background:#fff; }
+  #dots i.done{ background:rgba(255,255,255,.75); }
+  .ink #dots i{ background:rgba(80,40,24,.25); } .ink #dots i.on{ background:#6b3a22; } .ink #dots i.done{ background:rgba(80,40,24,.55); }
+  #bMusic{ width:44px; height:44px; border-radius:50%; display:grid; place-items:center; font:800 18px var(--sans); background:rgba(30,14,26,.42); border:1px solid rgba(255,255,255,.28); }
+  #bMusic.off{ opacity:.55; text-decoration:line-through; }
+  .ink #bMusic{ background:rgba(255,250,240,.6); color:#5a3020; border-color:rgba(90,48,32,.25); }
+
+  /* ---------- start ---------- */
+  #start{ position:absolute; inset:0; z-index:80; display:flex; flex-direction:column; align-items:center; justify-content:space-between; text-align:center;
+    padding:calc(13vh + var(--top)) 26px calc(9vh + var(--bot)); background:linear-gradient(rgba(30,12,30,.35), rgba(30,12,30,0) 40%, rgba(30,12,30,0) 62%, rgba(24,10,20,.75)); transition:opacity 1s; }
+  #start.gone{ opacity:0; pointer-events:none; }
+  #start .sk{ font:800 12.5px var(--sans); letter-spacing:.26em; text-transform:uppercase; color:var(--gold); text-shadow:0 1px 8px rgba(40,10,30,.6); }
+  #start h1{ margin-top:14px; font:italic 600 54px/1 var(--serif); text-shadow:0 3px 22px rgba(50,14,40,.6); }
+  #start h1 em{ display:block; font-size:76px; color:#ffe2b8; }
+  #start .ss{ margin-top:14px; font:italic 500 21px/1.35 var(--serif); color:rgba(255,246,236,.92); text-shadow:0 2px 10px rgba(40,10,30,.7); }
+  #start .low{ display:flex; flex-direction:column; align-items:center; }
+  #start .snd{ margin-top:12px; font:700 13.5px var(--sans); color:rgba(255,255,255,.75); }
+  #bOpen{ min-width:170px; }
+
+  /* ---------- coach ---------- */
+  #coach{ position:absolute; z-index:95; left:0; top:0; display:flex; flex-direction:column; align-items:center; pointer-events:none;
+    opacity:0; visibility:hidden; transition:opacity .25s, visibility 0s linear .25s; }
+  #coach.on{ opacity:1; visibility:visible; transition:opacity .25s; }
+  #coach.above{ flex-direction:column-reverse; }
+  #coachHand{ height:38px; font-size:32px; line-height:38px; filter:drop-shadow(0 3px 5px rgba(0,0,0,.45)); animation:chU .9s ease-in-out infinite; }
+  #coach.above #coachHand{ animation-name:chD; }
+  #coachLbl{ padding:9px 16px; border-radius:99px; background:var(--cue); color:#1d1600; font:800 15px/1.25 var(--sans); white-space:nowrap;
+    box-shadow:0 6px 18px rgba(0,0,0,.35), 0 0 0 2px rgba(255,255,255,.75); }
+  @keyframes chU{ 50%{ transform:translateY(-7px); } }
+  @keyframes chD{ 50%{ transform:translateY(7px); } }
+  #toast{ position:absolute; z-index:99; left:50%; top:calc(66px + var(--top)); width:max-content; max-width:86%; padding:11px 17px; border-radius:17px;
+    background:rgba(36,16,30,.94); color:#fff; font:700 15px/1.4 var(--sans); text-align:center; box-shadow:0 10px 30px rgba(0,0,0,.35);
+    opacity:0; transform:translate(-50%,-14px); pointer-events:none; transition:opacity .3s, transform .4s cubic-bezier(.2,.9,.3,1.25); }
+  #toast.on{ opacity:1; transform:translate(-50%,0); }
+
+  /* ---------- in-app browser ---------- */
+  #escape{ position:absolute; inset:0; z-index:200; display:grid; place-items:center; padding:calc(30px + var(--top)) 28px calc(30px + var(--bot)); background:radial-gradient(80% 60% at 50% 40%, #4a2238, #160a14); text-align:center; }
+  .ebox{ display:flex; flex-direction:column; align-items:center; max-width:330px; }
+  .ebox .logo{ font-size:60px; }
+  .e1{ margin-top:12px; font:800 12.5px var(--sans); letter-spacing:.2em; text-transform:uppercase; color:var(--gold); }
+  .e2{ font:700 21px/1.4 var(--sans); margin-top:10px; text-wrap:balance; }
+  .ebtn{ margin-top:24px; padding:15px 30px; border-radius:99px; background:#fff; color:#3b2018; font:900 16px var(--sans); text-decoration:none; white-space:nowrap; }
+  .e3{ margin-top:18px; font:600 13.5px/1.5 var(--sans); color:rgba(255,255,255,.7); text-wrap:balance; }
+  .e3 b{ color:#fff; }
+  #eStay{ margin-top:18px; padding:10px 14px; font:700 13.5px var(--sans); color:rgba(255,255,255,.7); text-decoration:underline; text-underline-offset:4px; }
+
+  @media (max-height:700px){
+    .ln{ font-size:22.5px; } .ln.big{ font-size:36px; } .ln.mid{ font-size:28px; } .ln.hi{ font-size:24px; } .ln.re{ font-size:29px; }
+    .ln.plain{ font-size:16px; } .ln.list{ font-size:20px; } .ln.sm{ font-size:20px; } .ln.kanji{ font-size:50px; }
+    #txt{ gap:9px; } .pos-bottom #txt{ bottom:calc(112px + var(--bot)); } .hasAct.pos-bottom #txt{ bottom:calc(178px + var(--bot)); }
+    #start h1{ font-size:46px; } #start h1 em{ font-size:64px; }
+  }
+  @media (prefers-reduced-motion:reduce){ .pic{ animation:none; } }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg"></div>
+  <div id="glow"></div>
+  <canvas id="fx"></canvas>
+  <div class="veil" id="vTop"></div><div class="veil" id="vB"></div><div class="veil" id="vT"></div><div class="veil" id="vC"></div>
+  <div class="veil" id="iB"></div><div class="veil" id="iT"></div><div class="veil" id="iC"></div>
+  <div id="txt"></div>
+  <div id="act"></div>
+  <div id="top"><div id="dots"></div><button id="bMusic" type="button" aria-label="Music">♪</button></div>
+
+  <div id="start" class="layer">
+    <div>
+      <p class="sk" id="sKick">A Thanksgiving note</p>
+      <h1>Thank you, <em>Jess</em></h1>
+      <p class="ss">A few things I've wanted to say</p>
+    </div>
+    <div class="low">
+      <button id="bOpen" class="pbtn" type="button">Open</button>
+      <p class="snd">🔊 Sound on, if you can</p>
+    </div>
+  </div>
+
+  <div id="coach" aria-hidden="true"><span id="coachHand">👆</span><span id="coachLbl"></span></div>
+  <div id="toast"></div>
+
+  <div id="escape" hidden class="layer">
+    <div class="ebox">
+      <div class="logo">🍂</div>
+      <p class="e1">One moment</p>
+      <p class="e2">This one is best in <span id="eWhere">your browser</span>, with the sound on.</p>
+      <a class="ebtn" id="eOut" href="#">Open in browser ›</a>
+      <p class="e3" id="eIos">If nothing happens, tap <b>•••</b> at the top right, then <b>Open in external browser</b>.</p>
+      <button id="eStay" type="button">Continue here instead</button>
+    </div>
+  </div>
+</div>
+<script src="app.js?v=1"></script>
+</body>
+</html>
