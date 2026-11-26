@@ -534,10 +534,20 @@ async function pOpen(){
 /* ---------- 2. a grace ---------- */
 async function pGrace(){
   scene({ bg: "w02-grace" });
-  fx.set({ motes: 26 });
+  fx.set({ motes: 6 });
+  music.level(.4, 3);
   put("A grace", "kick");
   await say("Dear God,", "mid", 2200);
-  await say("thank you for making her. You took your time, and it shows.");
+  await say("this Thanksgiving falls on 26/11.", "", 2800);
+  await say("So first, we remember the 166 people Mumbai lost in 2008,");
+  await clear();
+  await say("and the police, the commandos and the soldiers who ran towards danger so others could come home.");
+  await say("Thank you for them. And for everyone who still stands guard, like her Appa.");
+  await next();
+  await clear();
+  music.level(.75, 3);
+  fx.set({ motes: 26 });
+  await say("And thank you for making her. You took your time, and it shows.");
   await say("Thank you for her kindness, and for a heart that's somehow bigger than her to-do list.");
   await next();
   await clear();
